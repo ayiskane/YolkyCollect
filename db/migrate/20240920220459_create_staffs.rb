@@ -12,6 +12,7 @@ class CreateStaffs < ActiveRecord::Migration[7.2]
       t.string :desc_jp
       t.string :name_kr, null: false
       t.string :desc_kr
+      t.string :icon
 
       t.timestamps
     end
@@ -20,5 +21,6 @@ class CreateStaffs < ActiveRecord::Migration[7.2]
     add_index :staffs, :name_cn2
     add_index :staffs, :name_jp
     add_index :staffs, :name_kr
+    add_index :staffs, :icon
   end
 end
