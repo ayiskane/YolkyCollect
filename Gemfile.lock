@@ -172,6 +172,7 @@ GEM
     font_awesome5_rails (1.5.0)
       nokogiri (>= 1.11.3)
       railties (>= 4.2)
+    foreman (0.88.1)
     friendly_id (5.5.1)
       activerecord (>= 4.0.0)
     glob (0.4.1)
@@ -483,6 +484,18 @@ GEM
     stimulus-rails (1.3.4)
       railties (>= 6.0.0)
     stringio (3.1.1)
+    tailwindcss-rails (2.7.6)
+      railties (>= 7.0.0)
+    tailwindcss-rails (2.7.6-aarch64-linux)
+      railties (>= 7.0.0)
+    tailwindcss-rails (2.7.6-arm-linux)
+      railties (>= 7.0.0)
+    tailwindcss-rails (2.7.6-arm64-darwin)
+      railties (>= 7.0.0)
+    tailwindcss-rails (2.7.6-x86_64-darwin)
+      railties (>= 7.0.0)
+    tailwindcss-rails (2.7.6-x86_64-linux)
+      railties (>= 7.0.0)
     thor (1.3.2)
     tilt (2.4.0)
     timeout (0.4.1)
@@ -550,6 +563,7 @@ DEPENDENCIES
   dotenv-rails
   fiddle
   font_awesome5_rails
+  foreman
   friendly_id
   i18n-js
   i18n_yaml_sorter
@@ -585,6 +599,7 @@ DEPENDENCIES
   sprite-factory
   sprockets-rails
   stimulus-rails
+  tailwindcss-rails (~> 2.7)
   traco
   turbo-rails
   tzinfo-data
@@ -598,4 +613,4 @@ RUBY VERSION
    ruby 3.3.4p94
 
 BUNDLED WITH
-   2.5.19
+   2.5.20
