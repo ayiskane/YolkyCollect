@@ -169,6 +169,8 @@ GEM
     ffi (1.17.0-x86_64-darwin)
     ffi (1.17.0-x86_64-linux-gnu)
     fiddle (1.1.2)
+    font-awesome-sass (6.5.2)
+      sassc (~> 2.0)
     font_awesome5_rails (1.5.0)
       nokogiri (>= 1.11.3)
       railties (>= 4.2)
@@ -323,6 +325,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (3.1.7)
+    rack-cors (2.0.2)
+      rack (>= 2.0.0)
     rack-mini-profiler (3.3.1)
       rack (>= 1.2.0)
     rack-protection (4.0.0)
@@ -442,6 +446,8 @@ GEM
       google-protobuf (~> 4.27)
     sass-embedded (1.79.2-x86_64-linux-gnu)
       google-protobuf (~> 4.27)
+    sassc (2.4.0)
+      ffi (~> 1.9)
     sassc-embedded (1.78.0)
       sass-embedded (~> 1.78)
     securerandom (0.3.1)
@@ -562,6 +568,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   fiddle
+  font-awesome-sass (~> 6.1)
   font_awesome5_rails
   foreman
   friendly_id
@@ -582,6 +589,7 @@ DEPENDENCIES
   paper_trail
   pg (~> 1.1)
   puma (>= 5.0)
+  rack-cors
   rack-mini-profiler
   rails (~> 7.2.1)
   rails_bootstrap_sortable

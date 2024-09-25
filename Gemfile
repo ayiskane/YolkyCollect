@@ -82,3 +82,5 @@ end
 
 gem "tailwindcss-rails", "~> 2.7"
 gem "foreman"
+gem "font-awesome-sass", "~> 6.1"
+gem 'rack-cors', require: 'rack/cors'

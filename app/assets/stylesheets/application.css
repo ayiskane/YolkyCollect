@@ -17,3 +17,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "bootstrap/scss/bootstrap";
+@import "font-awesome";
+
+ .flash {
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.notice {
+  background: #D4EDDA;
+  color: #155724;
+}
+
+.alert {
+  background: #F8D7DA;
+  color: #721C24;
+}

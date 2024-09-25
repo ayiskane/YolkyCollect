@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_20_220953) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_24_230732) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -160,6 +160,20 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_20_220953) do
     t.index ["name_en"], name: "index_staffs_on_name_en"
     t.index ["name_jp"], name: "index_staffs_on_name_jp"
     t.index ["name_kr"], name: "index_staffs_on_name_kr"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "provider"
+    t.string "uid"
+    t.string "username"
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "email"
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
   end
 
   add_foreign_key "food_types", "areas"

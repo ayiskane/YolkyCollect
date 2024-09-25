@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discord Login</title>
+  <link rel="stylesheet" href="<%= asset_path('login.css') %>">
+</head>
+<body>
+  <div class="container">
+    <div class="login-box">
+      <h2>Yolky Collect</h2>
+      <%= button_to raw('<span class="login-btn-span">
+                            <span class="login-btn-context">
+                              <span class="icon-wrapper">
+                                <i class="fa-brands fa-discord"></i>
+                              </span>
+                              Login with Discord
+                            <span> 
+                          </span>
+                        '), 
+                    user_discord_omniauth_authorize_path,
+                    :method => :post,
+                    data: { turbo: "false" }, 
+                    class: "login-btn"
+      %>
+    </div>
+  </div>
+  <% if flash[:notice] %>
+    <div class="flash notice"><%= flash[:notice] %></div>
+  <% end %>
+  <% if flash[:alert] %>
+    <div class="flash alert"><%= flash[:alert] %></div>
+  <% end %>
+</body>
+</html>

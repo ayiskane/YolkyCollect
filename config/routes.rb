@@ -12,5 +12,12 @@ Rails.application.routes.draw do
   get "pages/testingTailwindCSS", to: "pages#testingTailwindCSS", as: "new_page"  # Add this line
   # Defines the root path route ("/")
   # root "posts#index"
-  root "pages#testingTailwindCSS"
+  root 'auth#login'
+
+  devise_for :users, controllers: {
+    session: 'users/sessions',
+    omniauth_callbacks: 'users/omniauth_callbacks#discord'
+  }
+
+  delete '/logout', to: 'sessions#destroy', as: :logout
 end
