@@ -1,0 +1,26 @@
+current directory: /var/www/vhosts/yolkycollect.com/yolkycollect/vendor/bundle/ruby/3.2.0/gems/passenger-6.0.23/src/helper-scripts/download_binaries
+/var/www/vhosts/yolkycollect.com/.rbenv/versions/3.2.3/bin/ruby extconf.rb
+Attempting to download https://github.com/phusion/passenger/releases/download/release-6.0.23/rubyext-ruby-3.2.3-x86_64-linux.tar.gz into /var/www/vhosts/yolkycollect.com/yolkycollect/vendor/bundle/ruby/3.2.0/gems/passenger-6.0.23/download_cache
+*** Could not download https://github.com/phusion/passenger/releases/download/release-6.0.23/rubyext-ruby-3.2.3-x86_64-linux.tar.gz: The requested URL returned error: 404
+Attempting to download https://oss-binaries.phusionpassenger.com/binaries/passenger/by_release/6.0.23/rubyext-ruby-3.2.3-x86_64-linux.tar.gz into /var/www/vhosts/yolkycollect.com/yolkycollect/vendor/bundle/ruby/3.2.0/gems/passenger-6.0.23/download_cache
+*** Could not download https://oss-binaries.phusionpassenger.com/binaries/passenger/by_release/6.0.23/rubyext-ruby-3.2.3-x86_64-linux.tar.gz: The requested URL returned error: 404
+Attempting to download https://s3.amazonaws.com/phusion-passenger/binaries/passenger/by_release/6.0.23/rubyext-ruby-3.2.3-x86_64-linux.tar.gz into /var/www/vhosts/yolkycollect.com/yolkycollect/vendor/bundle/ruby/3.2.0/gems/passenger-6.0.23/download_cache
+*** Could not download https://s3.amazonaws.com/phusion-passenger/binaries/passenger/by_release/6.0.23/rubyext-ruby-3.2.3-x86_64-linux.tar.gz: The requested URL returned error: 403
+Attempting to download https://github.com/phusion/passenger/releases/download/release-6.0.23/nginx-1.26.1-x86_64-linux.tar.gz into /var/www/vhosts/yolkycollect.com/yolkycollect/vendor/bundle/ruby/3.2.0/gems/passenger-6.0.23/download_cache
+Attempting to download https://github.com/phusion/passenger/releases/download/release-6.0.23/agent-x86_64-linux.tar.gz into /var/www/vhosts/yolkycollect.com/yolkycollect/vendor/bundle/ruby/3.2.0/gems/passenger-6.0.23/download_cache
+
+current directory: /var/www/vhosts/yolkycollect.com/yolkycollect/vendor/bundle/ruby/3.2.0/gems/passenger-6.0.23/src/helper-scripts/download_binaries
+make DESTDIR\= sitearchdir\=./.gem.20240925-29099-5jsbgm sitelibdir\=./.gem.20240925-29099-5jsbgm clean
+true
+
+current directory: /var/www/vhosts/yolkycollect.com/yolkycollect/vendor/bundle/ruby/3.2.0/gems/passenger-6.0.23/src/helper-scripts/download_binaries
+make DESTDIR\= sitearchdir\=./.gem.20240925-29099-5jsbgm sitelibdir\=./.gem.20240925-29099-5jsbgm
+true
+
+current directory: /var/www/vhosts/yolkycollect.com/yolkycollect/vendor/bundle/ruby/3.2.0/gems/passenger-6.0.23/src/helper-scripts/download_binaries
+make DESTDIR\= sitearchdir\=./.gem.20240925-29099-5jsbgm sitelibdir\=./.gem.20240925-29099-5jsbgm install
+true
+
+current directory: /var/www/vhosts/yolkycollect.com/yolkycollect/vendor/bundle/ruby/3.2.0/gems/passenger-6.0.23/src/helper-scripts/download_binaries
+make DESTDIR\= sitearchdir\=./.gem.20240925-29099-5jsbgm sitelibdir\=./.gem.20240925-29099-5jsbgm clean
+true
