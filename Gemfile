@@ -19,6 +19,7 @@ gem "chunky_png"
 gem "sprite-factory"
 gem "rmagick"
 gem "passenger"
+gem "rack-cors", require: "rack/cors"
 
 gem "rufo"
 gem "dotenv-rails", groups: [:development, :test]
