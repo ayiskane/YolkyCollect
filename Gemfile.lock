@@ -135,6 +135,7 @@ GEM
       logger
     faraday-net_http (3.3.0)
       net-http
+    foreman (0.88.1)
     friendly_id (5.5.1)
       activerecord (>= 4.0.0)
     glob (0.4.1)
@@ -410,6 +411,7 @@ DEPENDENCIES
   debug
   devise
   dotenv-rails
+  foreman
   friendly_id (~> 5.5.0)
   i18n-js
   importmap-rails

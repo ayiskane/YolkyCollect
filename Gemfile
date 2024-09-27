@@ -20,6 +20,7 @@ gem "sprite-factory"
 gem "rmagick"
 gem "passenger"
 gem "rack-cors", require: "rack/cors"
+gem "foreman"
 
 gem "rufo"
 gem "dotenv-rails", groups: [:development, :test]
