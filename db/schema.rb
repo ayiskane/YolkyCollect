@@ -11,20 +11,35 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.2].define(version: 2024_09_26_210132) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  create_schema "auth"
+  create_schema "extensions"
+  create_schema "graphql"
+  create_schema "graphql_public"
+  create_schema "pgbouncer"
+  create_schema "pgsodium"
+  create_schema "pgsodium_masks"
+  create_schema "realtime"
+  create_schema "storage"
+  create_schema "vault"
 
-  create_table "areas", id: :string, force: :cascade do |t|
-    t.string "name_en", null: false
-    t.string "name_cn", null: false
-    t.string "name_cn2", null: false
-    t.string "name_jp", null: false
-    t.string "name_kr", null: false
-    t.index ["name_cn"], name: "index_areas_on_name_cn"
-    t.index ["name_cn2"], name: "index_areas_on_name_cn2"
-    t.index ["name_en"], name: "index_areas_on_name_en"
-    t.index ["name_jp"], name: "index_areas_on_name_jp"
-    t.index ["name_kr"], name: "index_areas_on_name_kr"
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_graphql"
+  enable_extension "pg_stat_statements"
+  enable_extension "pgcrypto"
+  enable_extension "pgjwt"
+  enable_extension "pgsodium"
+  enable_extension "plpgsql"
+  enable_extension "supabase_vault"
+  enable_extension "uuid-ossp"
+
+  create_table "areas", id: :serial, force: :cascade do |t|
+    t.string "area_type"
+    t.string "scene"
+    t.string "name"
+    t.index ["area_type"], name: "index_areas_on_area_type"
+    t.index ["id"], name: "index_areas_on_id"
+    t.index ["name"], name: "index_areas_on_name"
+    t.index ["scene"], name: "index_areas_on_scene"
   end
 
   create_table "asset_keys", id: false, force: :cascade do |t|
