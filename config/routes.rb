@@ -10,5 +10,13 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "home#index"
+
+  devise_for :users, controllers: {
+    #registrations: 'users/registrations', # This controller handles actions related to user sign-up and account management.
+    session: 'users/sessions', # This controller handles actions related to user sign-in and sign-out.
+    omniauth_callbacks: 'users/omniauth_callbacks#discord' # This controller manages the authentication flow when users sign in using external providers like Google, Facebook, etc.
+  }
+
+  delete '/logout', to: 'sessions#destroy', as: :logout
 end

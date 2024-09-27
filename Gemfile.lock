@@ -140,6 +140,9 @@ GEM
     glob (0.4.1)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    google-protobuf (4.28.2-x64-mingw-ucrt)
+      bigdecimal
+      rake (>= 13)
     google-protobuf (4.28.2-x86_64-linux)
       bigdecimal
       rake (>= 13)
@@ -198,6 +201,8 @@ GEM
     net-smtp (0.5.0)
       net-protocol
     nio4r (2.7.3)
+    nokogiri (1.16.7-x64-mingw-ucrt)
+      racc (~> 1.4)
     nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
     oauth2 (2.0.9)
@@ -230,6 +235,7 @@ GEM
       rackup
       rake (>= 12.3.3)
     pg (1.5.8)
+    pg (1.5.8-x64-mingw-ucrt)
     pkg-config (1.5.6)
     popper_js (2.11.8)
     psych (5.1.2)
@@ -327,6 +333,8 @@ GEM
     ruby-progressbar (1.13.0)
     rubyzip (2.3.2)
     rufo (0.18.0)
+    sass-embedded (1.79.3-x64-mingw-ucrt)
+      google-protobuf (~> 4.27)
     sass-embedded (1.79.3-x86_64-linux-gnu)
       google-protobuf (~> 4.27)
     sassc-embedded (1.78.0)
@@ -360,6 +368,8 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    tzinfo-data (1.2024.2)
+      tzinfo (>= 1.0.0)
     uglifier (4.2.1)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (2.6.0)
@@ -383,6 +393,7 @@ GEM
     zeitwerk (2.6.18)
 
 PLATFORMS
+  x64-mingw-ucrt
   x86_64-linux
   x86_64-linux-gnu
 
