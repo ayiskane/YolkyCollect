@@ -19,4 +19,12 @@ Rails.application.routes.draw do
   }
 
   delete '/logout', to: 'sessions#destroy', as: :logout
+
+  authenticated :user, ->(user) { user.is_admin? } do
+    namespace :admin do
+      resources :posts
+    end
+  end
+
+  resources :posts, only: [:index, :show]
 end

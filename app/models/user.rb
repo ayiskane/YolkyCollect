@@ -16,4 +16,8 @@ class User < ApplicationRecord
     user.save if user.new_record?
     return user
   end
+
+  def is_admin?
+    admin
+  end
 end

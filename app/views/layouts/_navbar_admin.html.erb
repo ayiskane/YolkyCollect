@@ -1,0 +1,29 @@
+<!-- Navigation Tabs -->
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <%= link_to 'New Post', 
+                new_admin_post_path, 
+                class: "nav-link #{current_page?(new_admin_post_path) ? 'active' : 'inactive'}", 
+                role: "tab" 
+    %>
+  </li>
+  <li class="nav-item" role="presentation">
+    <%= link_to 'Admin Posts', '#' , class: "nav-link #{active_class('admin_posts')}", role: "tab" %>
+  </li>
+</ul>
+
+<!-- Content Here -->
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="allPosts" role="tabpanel">
+    <h2>All Posts</h2>
+    <!-- Display posts here -->
+  </div>
+  <div class="tab-pane fade" id="newPost" role="tabpanel">
+    <h2>Create a New Post</h2>
+    <!-- New post form here -->
+  </div>
+  <div class="tab-pane fade" id="adminPosts" role="tabpanel">
+    <h2>Admin Posts</h2>
+    <!-- Admin posts content here -->
+  </div>
+</div>
