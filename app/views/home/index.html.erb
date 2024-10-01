@@ -2,12 +2,7 @@
 <p>Find me in app/views/home/index.html.erb</p>
 
 <% @posts.each do |post| %>
-  <div class="card bg-light mb-3" style="max-width: 18rem;">
-    <div class="card-header"><%= post.title %></div>
-    <div class="card-body">
-      <p class="card-text"><%= post.content %></p>
-    </div>
-  </div>
+  <%= render partial: "card", locals: { post: post } %>
 <% end %>
 
 <% if @posts.empty? %>
