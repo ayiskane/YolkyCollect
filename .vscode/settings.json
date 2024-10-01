@@ -3,7 +3,14 @@
   "editor.formatOnSave": true,
   "[ruby]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "mbessey.vscode-rufo",
+    "editor.defaultFormatter": "rubocop.vscode-rubocop",
     "editor.foldingImportsByDefault": true
+  },
+  "[html.erb]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "rubocop.vscode-rubocop"
+  },
+  "[erb]": {
+    "editor.defaultFormatter": "rubocop.vscode-rubocop"
   }
 }
