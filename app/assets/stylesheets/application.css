@@ -14,3 +14,13 @@
  *= require_self
  *= require sprites
  */
+
+.navbar-theme {
+  background-image: url("<%= asset_path 'icons/bg_2.png' %>") !important;
+  background-repeat: repeat-x;
+  z-index: 1;
+}
+
+body {
+  background-color: #f8f9fa;
+}

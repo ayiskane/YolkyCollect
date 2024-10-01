@@ -14,6 +14,7 @@ gem "jbuilder"
 gem "redis", ">= 4.0.1"
 
 gem "rubocop", "~> 1.66", require: false
+gem "htmlbeautifier"
 
 # front end - bootstrap
 gem "bootstrap", "~> 5.3.3"

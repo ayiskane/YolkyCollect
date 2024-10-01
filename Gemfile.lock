@@ -167,6 +167,7 @@ GEM
       actioncable (>= 6.0.0)
       listen (>= 3.0.0)
       railties (>= 6.0.0)
+    htmlbeautifier (1.4.3)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.1)
@@ -433,6 +434,7 @@ DEPENDENCIES
   dotenv-rails
   friendly_id (~> 5.5.0)
   hotwire-livereload (~> 1.4)
+  htmlbeautifier
   importmap-rails
   jbuilder
   omniauth
