@@ -1,0 +1,18 @@
+/* app/assets/stylesheets/sprites.css */
+.sprite {
+    /* background-image:; */
+    background-repeat: no-repeat;
+    display: inline-block; /* Required for the size to be effective */
+}
+
+.sprite1 {
+    width: 32px; /* Width of the sprite */
+    height: 32px; /* Height of the sprite */
+    background-position: -10px -20px; /* X and Y position of the sprite in the sprite sheet */
+}
+
+.sprite2 {
+    width: 32px; /* Width of the sprite */
+    height: 32px; /* Height of the sprite */
+    background-position: -50px -20px; /* Adjust these values to the position of the next sprite */
+}
