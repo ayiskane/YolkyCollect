@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_27_225702) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_01_081332) do
   create_schema "auth"
   create_schema "extensions"
   create_schema "graphql"
@@ -80,6 +80,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_27_225702) do
     t.index ["scene"], name: "index_areas_on_scene"
   end
 
+  create_table "articles", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "asset_keys", id: false, force: :cascade do |t|
     t.string "id", null: false
     t.string "img1", null: false
@@ -105,12 +112,84 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_27_225702) do
     t.index ["version"], name: "index_assets_on_version"
   end
 
+  create_table "battle_order_groups", id: :string, force: :cascade do |t|
+    t.decimal "version", precision: 5, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_battle_order_groups_on_id", unique: true
+    t.index ["version"], name: "index_battle_order_groups_on_version"
+  end
+
+  create_table "battle_orders", id: :string, force: :cascade do |t|
+    t.string "battle_order_group_id", null: false
+    t.decimal "version", precision: 5, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["battle_order_group_id"], name: "index_battle_orders_on_battle_order_group_id"
+    t.index ["id"], name: "index_battle_orders_on_id", unique: true
+  end
+
+  create_table "booths", id: :string, force: :cascade do |t|
+    t.decimal "version", precision: 5, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_booths_on_id", unique: true
+  end
+
+  create_table "building_groups", id: :string, force: :cascade do |t|
+    t.bigint "area_id", null: false
+    t.index ["area_id"], name: "index_building_groups_on_area_id"
+    t.index ["id"], name: "index_building_groups_on_id", unique: true
+  end
+
+  create_table "buildings", id: :string, force: :cascade do |t|
+    t.decimal "version", precision: 5, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_buildings_on_id", unique: true
+  end
+
   create_table "currencies", id: :string, force: :cascade do |t|
     t.string "name"
     t.integer "costtype"
     t.index ["costtype"], name: "index_currencies_on_costtype"
     t.index ["id"], name: "index_currencies_on_id"
     t.index ["name"], name: "index_currencies_on_name"
+  end
+
+  create_table "customers", id: :string, force: :cascade do |t|
+    t.decimal "version", precision: 5, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_customers_on_id", unique: true
+  end
+
+  create_table "events", id: :string, force: :cascade do |t|
+    t.decimal "version", precision: 5, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_events_on_id", unique: true
+  end
+
+  create_table "flowers", id: :string, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_flowers_on_id", unique: true
+  end
+
+  create_table "food_groups", id: :string, force: :cascade do |t|
+    t.decimal "version", precision: 5, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_food_groups_on_id", unique: true
+    t.index ["version"], name: "index_food_groups_on_version"
+  end
+
+  create_table "foods", force: :cascade do |t|
+    t.decimal "version", precision: 5, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_foods_on_id", unique: true
   end
 
   create_table "localize_data", id: :string, force: :cascade do |t|
@@ -129,13 +208,95 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_27_225702) do
     t.index ["kr"], name: "index_localize_data_on_kr"
   end
 
+  create_table "mails", id: :string, force: :cascade do |t|
+    t.decimal "version", precision: 5, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_mails_on_id", unique: true
+  end
+
+  create_table "memorial_groups", id: :string, force: :cascade do |t|
+    t.decimal "version", precision: 5, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_memorial_groups_on_id", unique: true
+    t.index ["version"], name: "index_memorial_groups_on_version"
+  end
+
+  create_table "memorials", id: :string, force: :cascade do |t|
+    t.decimal "version", precision: 5, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_memorials_on_id", unique: true
+  end
+
+  create_table "mewchelins", id: :string, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_mewchelins_on_id", unique: true
+  end
+
+  create_table "npcs", id: :string, force: :cascade do |t|
+    t.decimal "version", precision: 5, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_npcs_on_id", unique: true
+    t.index ["version"], name: "index_npcs_on_version"
+  end
+
+  create_table "orders", id: :string, force: :cascade do |t|
+    t.decimal "version", precision: 5, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_orders_on_id", unique: true
+  end
+
+  create_table "pets", id: :string, force: :cascade do |t|
+    t.decimal "version", precision: 5, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_pets_on_id", unique: true
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.string "tags"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "show"
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "secret_stores", id: :string, force: :cascade do |t|
+    t.decimal "version", precision: 5, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_secret_stores_on_id", unique: true
+  end
+
+  create_table "staff_skills", force: :cascade do |t|
+    t.string "staff_id", null: false
+    t.index ["id"], name: "index_staff_skills_on_id"
+    t.index ["staff_id"], name: "index_staff_skills_on_staff_id"
+  end
+
+  create_table "staffs", id: :string, force: :cascade do |t|
+    t.index ["id"], name: "index_staffs_on_id", unique: true
+  end
+
+  create_table "terrace_dvd_groups", id: :string, force: :cascade do |t|
+    t.decimal "version", precision: 5, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_terrace_dvd_groups_on_id", unique: true
+  end
+
+  create_table "terrace_dvds", id: :string, force: :cascade do |t|
+    t.decimal "version", precision: 5, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_terrace_dvds_on_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -155,5 +316,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_27_225702) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "battle_orders", "battle_order_groups"
+  add_foreign_key "building_groups", "areas"
   add_foreign_key "posts", "users"
+  add_foreign_key "staff_skills", "staffs"
 end

@@ -3,6 +3,15 @@ class Admin::PostsController < ApplicationController
   before_action :set_post, only: %i[update destroy]
 
   def index
+    @posts = Post.all
+  end
+
+  def show
+    @post = Post.find(params[:id])
+  end
+
+  def new
+    @post = Post.new
   end
 
   def create
@@ -10,8 +19,9 @@ class Admin::PostsController < ApplicationController
     @post.user = current_user
 
     if @post.save
-      redirect_to @post, notice: 'Post was successfully created.'
+      redirect_to admin_post_path(@post), notice: 'Post was successfully created.'
     else
+      Rails.logger.error @post.errors.full_messages.join(", ")
       render :new
     end
   end
@@ -28,7 +38,7 @@ class Admin::PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to root_path, notice: 'Post was successfully deleted.'
+    redirect_to admin_posts_path, notice: 'Post was successfully deleted.'
   end
 
   private
@@ -38,7 +48,7 @@ class Admin::PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content, :tags)
+    params.require(:post).permit(:title, :content, :tags, :show)
   end
 
   def check_admin_role!
