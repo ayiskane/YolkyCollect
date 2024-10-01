@@ -1,0 +1,9 @@
+{
+  "editor.wordWrap": "on",
+  "editor.formatOnSave": true,
+  "[ruby]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "mbessey.vscode-rufo",
+    "editor.foldingImportsByDefault": true
+  }
+}
