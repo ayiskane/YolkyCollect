@@ -2,8 +2,6 @@
 // import "controllers";
 // import * as bootstrap from "bootstrap";
 // import { createPopper } from "@popperjs/core";
-import { Turbo } from "@hotwired/turbo-rails";
-Turbo.start();
 
 // document.addEventListener("DOMContentLoaded", function () {
 //   var tooltipTriggerList = [].slice.call(

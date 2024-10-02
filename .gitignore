@@ -31,6 +31,7 @@
 
 /public/assets
 /app/assets/images/*
+/app/assets/fontawesome/*
 
 /node_modules/*
 

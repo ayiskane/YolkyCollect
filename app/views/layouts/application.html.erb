@@ -10,11 +10,11 @@
 		<link rel="manifest" href="/manifest.json">
 
 		<!-- Favicons -->
-		<link rel="icon" href="<%= asset_path "favicon.ico" %>" type="image/x-icon">
-		<link rel="icon" href="<%= asset_path "favicon.png" %>" type="image/png">
-		<link rel="icon" href="<%= asset_path "favicon-32x32.png" %>" sizes="32x32" type="image/png">
-		<link rel="icon" href="<%= asset_path "favicon-16x16.png" %>" sizes="16x16" type="image/png">
-		<link rel="apple-touch-icon" href="<%= asset_path "favicon.png" %>">
+		<link rel="icon" href="<%= asset_path 'favicon.ico' %>" type="image/x-icon">
+		<link rel="icon" href="<%= asset_path 'favicon.png' %>" type="image/png">
+		<link rel="icon" href="<%= asset_path 'favicon-32x32.png' %>" sizes="32x32" type="image/png">
+		<link rel="icon" href="<%= asset_path 'favicon-16x16.png' %>" sizes="16x16" type="image/png">
+		<link rel="apple-touch-icon" href="<%= asset_path 'favicon.png' %>">
 
 		<!-- Bootstrap CSS CDN -->
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
@@ -22,8 +22,9 @@
 		<!-- Bootstrap Icons -->
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
-		<!-- Font Awesome CSS from CDN -->
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/aquawolf04/font-awesome-pro@5cd1511/css/all.css">
+
+		<!-- Custom CSS here -->
+		<%= stylesheet_link_tag 'application', media: 'all' %>
 
 		<!-- Include Popper.js and Bootstrap JS from CDN -->
 		<%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" %>
@@ -32,10 +33,24 @@
 		<!-- Ensure your application JavaScript is included after Bootstrap -->
 		<%= javascript_include_tag "application", 'data-turbo-track': Rails.env.production? ? "reload" : "" %>
 		<%= javascript_importmap_tags %>
-		<%= hotwire_livereload_tags if Rails.env.development? %>
 	</head>
 	<body>
-		<%= render 'layouts/bars' %>
-		<%= yield %>
+		<div class="d-flex">
+			<!-- Sidebar -->
+			<div class="sidebar">
+				<%= render 'layouts/sidebar' %>
+			</div>
+
+			<!-- Main content area -->
+			<div class="main-content flex-grow-1">
+				<!-- Navbar -->
+				<%= render 'layouts/navbar' %>
+
+				<!-- Body content -->
+				<div class="content">
+					<%= yield %>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>

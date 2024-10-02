@@ -1,0 +1,69 @@
+/* Sidebar */
+.sidebar {
+  background-color: #a2d8de;
+  background-image: url("/assets/icons/72143c94-d992-47fc-936c-ac39e406f298.png");
+  background-position: bottom;
+  background-size: auto 180px;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 280px;
+  padding: 15px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 3px 0 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+/* Sidebar Logo */
+.sidebar-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  text-decoration: none;
+}
+
+.sidebar-logo-img {
+  max-width: 50%;
+  height: auto;
+}
+
+/* Nav Links */
+.nav-pills .nav-link {
+  color: #000; /* Default color */
+  padding: 10px;
+  font-weight: 500;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+/* Collapsible content */
+.btn-toggle-nav .nav-item .nav-link {
+  padding-left: 20px; /* Add indentation for child links */
+}
+
+/* Hover and active states */
+.nav-pills .nav-link:hover,
+.nav-pills .nav-link:focus {
+  color: #007bff; /* Change to your desired hover color */
+  background-color: #f1f1f1; /* Optional hover background */
+}
+
+.nav-pills .nav-link.active {
+  color: #fff;
+  background-color: #007bff; /* Active background color */
+}
+
+/* Collapse */
+.collapse ul {
+  padding-left: 15px;
+}
+
+.collapse ul li a {
+  color: #6c757d; /* Lighter color for nested links */
+}
+
+.collapse ul li a:hover {
+  color: #007bff;
+}

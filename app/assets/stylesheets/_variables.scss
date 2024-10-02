@@ -1,6 +1,24 @@
 // app/assets/stylesheets/_variables.scss
 
-$primary: #ff6347; // Change the primary color, for example
+// Custom Nav Link Variables
+$nav-link-color: #007bff;
+$nav-link-hover-color: #0056b3;
+$nav-link-active-color: #ff4500;
+$nav-link-padding-y: 0.5rem;
+$nav-link-padding-x: 1rem;
+$nav-link-font-size: 1rem;
+$nav-link-font-weight: 500;
+$nav-link-hover-bg: transparent;
+$nav-link-active-bg: transparent;
+
+:root,
+[data-theme="summer"] {
+  --font-roboto: "Roboto", sans-serif;
+  --font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --body-font-family: var(--font-roboto);
+}
 
 // Import Bootstrap after your custom variables
 @import "bootstrap";

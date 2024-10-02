@@ -1,0 +1,39 @@
+/* Navbar */
+.navbar {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background-color: #ffffff;
+  box-shadow: -4px 5px 4px -4px gray;
+}
+.navbar-theme {
+  background-image: url("/assets/icons/bg_3.png") !important;
+  background-repeat: repeat-x;
+  background-size: auto 180px;
+  background-position: top;
+  padding: 0.5rem 1rem;
+  z-index: 1;
+}
+
+/* navbar link colors */
+.navbar-theme .nav-link {
+  display: block;
+  padding: var(--nav-link-padding-y, 0.5rem) var(--nav-link-padding-x, 1rem);
+  font-size: var(--nav-link-font-size, 1rem);
+  color: var(--nav-link-color);
+  background: none;
+  border: 0;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out;
+}
+
+.navbar-theme .nav-link:hover {
+  color: var(--nav-link-hover-color);
+  background-color: var(--nav-link-hover-bg, transparent);
+}
+
+.navbar-theme .nav-link.active {
+  color: var(--nav-link-active-color);
+  background-color: var(--nav-link-active-bg, transparent);
+}
