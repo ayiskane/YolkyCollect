@@ -10,22 +10,15 @@
 
 require 'csv'
 
-# Load Assets
-# CSV.foreach(Rails.root.join('db/csv/assets.csv'), headers: true) do |row|
-#   Asset.create!(
-#     asset_id: row['asset_id'],
-#     uuid: row['uuid'],
-#     url: row['url'],
-#     version: row['version'].to_f
-#   )
-# end
+csv_file_path = Rails.root.join('db', 'csv', '11.25_localizeData.csv')
 
-# Load AssetKeys
-CSV.foreach(Rails.root.join('db/csv/asset_keys.csv'), headers: true) do |row|
-  AssetKey.create!(
-    id: row['id'],
-    asset_id: row['asset_id'],
-    order: row['order'],
-    version: row['version'].to_f
-  )
+# Open the CSV file and iterate over each row
+CSV.foreach(csv_file_path, headers: true) do |row|
+  LocalizeData.find_or_create_by(id: row['id']) do |localize_data|
+    localize_data.en = row['en']
+    localize_data.cn = row['cn']
+    localize_data.cn2 = row['cn2']
+    localize_data.jp = row['jp']
+    localize_data.kr = row['kr']
+  end
 end

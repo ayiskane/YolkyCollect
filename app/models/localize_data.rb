@@ -1,0 +1,2 @@
+class LocalizeData < ApplicationRecord
+end
