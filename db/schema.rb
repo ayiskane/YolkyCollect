@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_03_155540) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_03_211105) do
   create_schema "auth"
   create_schema "extensions"
   create_schema "graphql"
@@ -70,14 +70,23 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_03_155540) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "areas", id: :serial, force: :cascade do |t|
-    t.string "area_type"
-    t.string "scene"
+  create_table "areas", force: :cascade do |t|
+    t.string "area"
     t.string "name"
-    t.index ["area_type"], name: "index_areas_on_area_type"
-    t.index ["id"], name: "index_areas_on_id"
+    t.string "scene"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["area"], name: "index_areas_on_area"
+    t.index ["id"], name: "index_areas_on_id", unique: true
     t.index ["name"], name: "index_areas_on_name"
     t.index ["scene"], name: "index_areas_on_scene"
+  end
+
+  create_table "areas_employees", id: false, force: :cascade do |t|
+    t.string "employee_id"
+    t.bigint "area_id"
+    t.index ["area_id"], name: "index_areas_employees_on_area_id"
+    t.index ["employee_id", "area_id"], name: "index_areas_employees_on_employee_id_and_area_id", unique: true
   end
 
   create_table "articles", force: :cascade do |t|
@@ -110,6 +119,12 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_03_155540) do
     t.index ["asset_id"], name: "index_assets_on_asset_id"
     t.index ["url"], name: "index_assets_on_url"
     t.index ["version"], name: "index_assets_on_version"
+  end
+
+  create_table "employees", id: :string, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_employees_on_id", unique: true
   end
 
   create_table "localize_data", id: :string, force: :cascade do |t|
@@ -145,4 +160,5 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_03_155540) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "areas_employees", "areas"
 end
