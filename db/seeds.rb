@@ -10,19 +10,22 @@
 
 require 'csv'
 
-csv_file_path = Rails.root.join('db', 'csv', 'customerData.csv')
+csv_file_path = Rails.root.join('db', 'csv', 'memorialData.csv')
 
 CSV.foreach(csv_file_path, headers: true) do |row|
-  Customer.create!(
-    id: row['id'],
-    needStar: row['needStar'],
-    shareCoin: row['shareCoin'],
-    isDoll: row['doll'],
-    needCustomerId: row['needCus'],
-    hasOrder: row['hasOrder'],
-    assetKeyId: row['img'],
-    version: row['version'],
-    created_at: Time.now,
-    updated_at: Time.now
-  )
+  source_customer = Customer.find_by(id: row['from'])  # Ensure 'from' matches a valid customer id
+  need_customer = Customer.find_by(id: row['needCus'])  # Ensure 'needCus' matches a valid customer id
+
+  # Find or create the Memorial record
+  Memorial.find_or_create_by(id: row['id']) do |memorial|
+    memorial.sourceCustomer = source_customer
+    memorial.needStar = row['needStar']
+    memorial.shareCoin = row['shareCoin']
+    memorial.needPlayDay = row['needPlayDay']
+    memorial.needCustomer = need_customer
+    memorial.needCustomerCnt = row['needCusCount (count)']
+    memorial.isSecretStore = row['secret_store']
+    memorial.assetKeyId = row['img']
+    memorial.version = row['version']
+  end
 end

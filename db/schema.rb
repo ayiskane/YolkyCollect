@@ -169,11 +169,11 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_05_174014) do
   end
 
   create_table "memorials", id: :string, force: :cascade do |t|
-    t.string "source", null: false
+    t.string "sourceCustomer_id"
     t.integer "needStar"
     t.integer "shareCoin"
     t.integer "needPlayDay"
-    t.string "needCustomerId"
+    t.string "needCustomer_id"
     t.string "needCustomerCnt"
     t.boolean "isSecretStore"
     t.string "assetKeyId"
@@ -181,14 +181,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_05_174014) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["assetKeyId"], name: "index_memorials_on_assetKeyId"
-    t.index ["id"], name: "index_memorials_on_id", unique: true
     t.index ["isSecretStore"], name: "index_memorials_on_isSecretStore"
     t.index ["needCustomerCnt"], name: "index_memorials_on_needCustomerCnt"
-    t.index ["needCustomerId"], name: "index_memorials_on_needCustomerId"
+    t.index ["needCustomer_id"], name: "index_memorials_on_needCustomer_id"
     t.index ["needPlayDay"], name: "index_memorials_on_needPlayDay"
     t.index ["needStar"], name: "index_memorials_on_needStar"
     t.index ["shareCoin"], name: "index_memorials_on_shareCoin"
-    t.index ["source"], name: "index_memorials_on_source"
+    t.index ["sourceCustomer_id"], name: "index_memorials_on_sourceCustomer_id"
     t.index ["version"], name: "index_memorials_on_version"
   end
 
@@ -210,4 +209,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_05_174014) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "areas_employees", "areas"
+  add_foreign_key "memorials", "customers", column: "needCustomer_id"
+  add_foreign_key "memorials", "customers", column: "sourceCustomer_id"
 end
