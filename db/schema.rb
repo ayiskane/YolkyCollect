@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_03_211105) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_05_174014) do
   create_schema "auth"
   create_schema "extensions"
   create_schema "graphql"
@@ -121,6 +121,25 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_03_211105) do
     t.index ["version"], name: "index_assets_on_version"
   end
 
+  create_table "customers", id: :string, force: :cascade do |t|
+    t.integer "needStar"
+    t.integer "shareCoin"
+    t.boolean "isDoll"
+    t.string "needCustomerId"
+    t.boolean "hasOrder"
+    t.string "assetKeyId"
+    t.float "version"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["assetKeyId"], name: "index_customers_on_assetKeyId"
+    t.index ["hasOrder"], name: "index_customers_on_hasOrder"
+    t.index ["isDoll"], name: "index_customers_on_isDoll"
+    t.index ["needCustomerId"], name: "index_customers_on_needCustomerId"
+    t.index ["needStar"], name: "index_customers_on_needStar"
+    t.index ["shareCoin"], name: "index_customers_on_shareCoin"
+    t.index ["version"], name: "index_customers_on_version"
+  end
+
   create_table "employees", id: :string, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -141,6 +160,36 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_03_211105) do
     t.index ["id"], name: "index_localize_data_on_id", unique: true
     t.index ["jp"], name: "index_localize_data_on_jp"
     t.index ["kr"], name: "index_localize_data_on_kr"
+  end
+
+  create_table "memorial_groups", id: :string, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_memorial_groups_on_id", unique: true
+  end
+
+  create_table "memorials", id: :string, force: :cascade do |t|
+    t.string "source", null: false
+    t.integer "needStar"
+    t.integer "shareCoin"
+    t.integer "needPlayDay"
+    t.string "needCustomerId"
+    t.string "needCustomerCnt"
+    t.boolean "isSecretStore"
+    t.string "assetKeyId"
+    t.float "version"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["assetKeyId"], name: "index_memorials_on_assetKeyId"
+    t.index ["id"], name: "index_memorials_on_id", unique: true
+    t.index ["isSecretStore"], name: "index_memorials_on_isSecretStore"
+    t.index ["needCustomerCnt"], name: "index_memorials_on_needCustomerCnt"
+    t.index ["needCustomerId"], name: "index_memorials_on_needCustomerId"
+    t.index ["needPlayDay"], name: "index_memorials_on_needPlayDay"
+    t.index ["needStar"], name: "index_memorials_on_needStar"
+    t.index ["shareCoin"], name: "index_memorials_on_shareCoin"
+    t.index ["source"], name: "index_memorials_on_source"
+    t.index ["version"], name: "index_memorials_on_version"
   end
 
   create_table "users", force: :cascade do |t|
