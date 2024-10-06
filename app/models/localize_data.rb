@@ -1,3 +1,5 @@
 class LocalizeData < ApplicationRecord
-    has_many :employees, foreign_key: :id, primary_key: :id
+    has_many :building_styles
+    has_many :building_groups
+    has_many :customer_groups
 end

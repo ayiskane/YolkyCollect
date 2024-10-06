@@ -1,0 +1,20 @@
+-I/usr/include/x86_64-linux-gnu//ImageMagick-6
+-I/usr/include/ImageMagick-6
+-I/var/www/vhosts/yolkycollect.com/yolkycollect/vendor/bundle/ruby/3.2.0/gems/rmagick-6.0.1/ext/RMagick
+-I/var/www/vhosts/yolkycollect.com/.rbenv/versions/3.2.3/include/ruby-3.2.0
+-I/var/www/vhosts/yolkycollect.com/.rbenv/versions/3.2.3/include/ruby-3.2.0/ruby/backward
+-I/var/www/vhosts/yolkycollect.com/.rbenv/versions/3.2.3/include/ruby-3.2.0/x86_64-linux
+-std=c++11
+-DMAGICKCORE_HDRI_ENABLE=0
+-DMAGICKCORE_QUANTUM_DEPTH=16
+-DHAVE_MAGICK_MAGICKCORE_H
+-DHAVE_MALLOC_H
+-DHAVE_POSIX_MEMALIGN
+-DHAVE_MALLOC_USABLE_SIZE
+-DHAVE_GETIMAGECHANNELENTROPY
+-DHAVE_SETIMAGEGRAY
+-DHAVE_SETMAGICKALIGNEDMEMORYMETHODS
+-DRUBY_VERSION_STRING="ruby 3.2.3"
+-DRMAGICK_VERSION_STRING="RMagick 6.0.1"
+-DIMAGEMAGICK_GREATER_THAN_EQUAL_6_9_0=1
+-DIMAGEMAGICK_GREATER_THAN_EQUAL_6_9_10=1
