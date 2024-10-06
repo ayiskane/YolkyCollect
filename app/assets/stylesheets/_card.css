@@ -1,0 +1,29 @@
+.card {
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.card.expanded {
+  position: absolute;
+  z-index: 1050;
+  width: 80%;
+  height: 60%;
+  left: 10%;
+  top: 20%;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 1040;
+}
+
+.overlay.active {
+  display: block;
+}

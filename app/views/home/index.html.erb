@@ -1,6 +1,14 @@
 <h1>Welcome to My Rails Application!</h1>
 <p>Your Ruby on Rails app is running successfully.</p>
 
-<button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" title="Tooltip text!">
-	Hover me to see the tooltip!!!
-</button>
+<div class="container">
+	<div class="row">
+		<% @memorials.each do |memorial| %>
+			<%= render partial: "layouts/card", locals: { memorial: memorial, memorial_name: localized_name(memorial.id) } %>
+		<% end %>
+	</div>
+</div>
+
+
+<div class="overlay"></div>
+<!-- Overlay for expanding effect -->
