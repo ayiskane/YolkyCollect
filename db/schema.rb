@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_05_174014) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_06_060402) do
   create_schema "auth"
   create_schema "extensions"
   create_schema "graphql"
@@ -96,27 +96,19 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_05_174014) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "asset_keys", id: false, force: :cascade do |t|
-    t.string "id", null: false
+  create_table "asset_keys", id: :string, force: :cascade do |t|
     t.string "asset_id", null: false
-    t.integer "order", null: false
-    t.decimal "version", precision: 10, scale: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["asset_id"], name: "index_asset_keys_on_asset_id"
-    t.index ["id"], name: "index_asset_keys_on_id"
-    t.index ["order"], name: "index_asset_keys_on_order"
-    t.index ["version"], name: "index_asset_keys_on_version"
   end
 
-  create_table "assets", force: :cascade do |t|
-    t.string "asset_id", null: false
+  create_table "assets", id: :string, force: :cascade do |t|
     t.string "uuid", null: false
     t.string "url", null: false
     t.decimal "version", precision: 10, scale: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["asset_id"], name: "index_assets_on_asset_id"
     t.index ["url"], name: "index_assets_on_url"
     t.index ["version"], name: "index_assets_on_version"
   end
@@ -209,6 +201,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_05_174014) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "areas_employees", "areas"
+  add_foreign_key "asset_keys", "assets"
   add_foreign_key "memorials", "customers", column: "needCustomer_id"
   add_foreign_key "memorials", "customers", column: "sourceCustomer_id"
 end

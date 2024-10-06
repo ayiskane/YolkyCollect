@@ -10,22 +10,27 @@
 
 require 'csv'
 
-csv_file_path = Rails.root.join('db', 'csv', 'memorialData.csv')
+# Seed AssetKeys from CSV
+asset_keys_file_path = '/var/www/vhosts/yolkycollect.com/yolkycollect/db/csv/asset_keys.csv'
+CSV.foreach(asset_keys_file_path, headers: true) do |row|
+  # Find the asset by id
+  asset = Asset.find_by(id: row['asset_id'])
 
-CSV.foreach(csv_file_path, headers: true) do |row|
-  source_customer = Customer.find_by(id: row['from'])  # Ensure 'from' matches a valid customer id
-  need_customer = Customer.find_by(id: row['needCus'])  # Ensure 'needCus' matches a valid customer id
+  if asset
+    # Use find_or_initialize_by to find or create a new AssetKey
+    asset_key = AssetKey.find_or_initialize_by(id: row['id']) do |key|
+      key.asset = asset  # Assign the asset only when creating a new record
+    end
 
-  # Find or create the Memorial record
-  Memorial.find_or_create_by(id: row['id']) do |memorial|
-    memorial.sourceCustomer = source_customer
-    memorial.needStar = row['needStar']
-    memorial.shareCoin = row['shareCoin']
-    memorial.needPlayDay = row['needPlayDay']
-    memorial.needCustomer = need_customer
-    memorial.needCustomerCnt = row['needCusCount (count)']
-    memorial.isSecretStore = row['secret_store']
-    memorial.assetKeyId = row['img']
-    memorial.version = row['version']
+    # Update attributes if the asset_key is already existing
+    asset_key.asset = asset if asset_key.asset_id != asset.id
+
+    # Save the record (create or update)
+    asset_key.save!
+  else
+    puts "Asset with ID #{row['asset_id']} not found!"
   end
 end
+
+
+puts "Seeding completed!"
