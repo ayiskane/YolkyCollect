@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_06_230559) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_07_022033) do
   create_schema "auth"
   create_schema "extensions"
   create_schema "graphql"
@@ -192,8 +192,28 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_06_230559) do
     t.index ["localize_id"], name: "index_customer_groups_on_localize_id"
   end
 
+  create_table "customer_need_foods", force: :cascade do |t|
+    t.string "customer_id", null: false
+    t.string "food_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id", "food_id"], name: "index_customer_need_foods_on_customer_id_and_food_id", unique: true
+    t.index ["customer_id"], name: "index_customer_need_foods_on_customer_id"
+    t.index ["food_id"], name: "index_customer_need_foods_on_food_id"
+  end
+
+  create_table "customer_order_foods", force: :cascade do |t|
+    t.string "customer_id", null: false
+    t.string "food_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id", "food_id"], name: "index_customer_order_foods_on_customer_id_and_food_id", unique: true
+    t.index ["customer_id"], name: "index_customer_order_foods_on_customer_id"
+    t.index ["food_id"], name: "index_customer_order_foods_on_food_id"
+  end
+
   create_table "customers", id: :string, force: :cascade do |t|
-    t.string "food_order"
+    t.bigint "customer_group_id"
     t.integer "need_star"
     t.integer "need_ad_lv"
     t.string "need_memorial"
@@ -229,7 +249,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_06_230559) do
     t.index ["asset"], name: "index_customers_on_asset"
     t.index ["battle_order"], name: "index_customers_on_battle_order"
     t.index ["carry_order"], name: "index_customers_on_carry_order"
-    t.index ["food_order"], name: "index_customers_on_food_order"
+    t.index ["customer_group_id"], name: "index_customers_on_customer_group_id"
     t.index ["is_community"], name: "index_customers_on_is_community"
     t.index ["is_doll"], name: "index_customers_on_is_doll"
     t.index ["is_halloween"], name: "index_customers_on_is_halloween"
@@ -254,9 +274,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_06_230559) do
   create_table "foods", id: :string, force: :cascade do |t|
     t.integer "cost"
     t.integer "cook_time"
-    t.integer "food_order_group"
+    t.integer "food_order_customer_group"
     t.decimal "food_order_factor"
-    t.string "need_customer"
+    t.string "need_customer_id"
     t.string "need_mail"
     t.string "need_memorial"
     t.string "need_order"
@@ -275,15 +295,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_06_230559) do
     t.string "lv_3_need_building"
     t.string "lv_3_need_mail"
     t.integer "lv_3_need_star"
-    t.string "asset"
     t.decimal "version", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["asset"], name: "index_foods_on_asset"
     t.index ["cook_time"], name: "index_foods_on_cook_time"
     t.index ["cost"], name: "index_foods_on_cost"
+    t.index ["food_order_customer_group"], name: "index_foods_on_food_order_customer_group"
     t.index ["food_order_factor"], name: "index_foods_on_food_order_factor"
-    t.index ["food_order_group"], name: "index_foods_on_food_order_group"
     t.index ["lv_1_income"], name: "index_foods_on_lv_1_income"
     t.index ["lv_1_need_ad_lv"], name: "index_foods_on_lv_1_need_ad_lv"
     t.index ["lv_1_need_building"], name: "index_foods_on_lv_1_need_building"
@@ -298,7 +316,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_06_230559) do
     t.index ["lv_3_need_mail"], name: "index_foods_on_lv_3_need_mail"
     t.index ["lv_3_need_star"], name: "index_foods_on_lv_3_need_star"
     t.index ["need_booth"], name: "index_foods_on_need_booth"
-    t.index ["need_customer"], name: "index_foods_on_need_customer"
+    t.index ["need_customer_id"], name: "index_foods_on_need_customer_id"
     t.index ["need_mail"], name: "index_foods_on_need_mail"
     t.index ["need_memorial"], name: "index_foods_on_need_memorial"
     t.index ["need_order"], name: "index_foods_on_need_order"
@@ -320,6 +338,58 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_06_230559) do
     t.index ["id"], name: "index_localize_data_on_id", unique: true
     t.index ["jp"], name: "index_localize_data_on_jp"
     t.index ["kr"], name: "index_localize_data_on_kr"
+  end
+
+  create_table "mail_groups", force: :cascade do |t|
+    t.string "localize_id", null: false
+    t.decimal "version", precision: 10, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["localize_id"], name: "index_mail_groups_on_localize_id"
+    t.index ["version"], name: "index_mail_groups_on_version"
+  end
+
+  create_table "mails", force: :cascade do |t|
+    t.integer "star"
+    t.integer "need_star"
+    t.decimal "prob"
+    t.integer "group_index"
+    t.bigint "mail_group_id"
+    t.string "mail_group_customer_id"
+    t.boolean "is_food"
+    t.string "food_id"
+    t.string "need_employee"
+    t.string "need_order"
+    t.string "need_customer"
+    t.string "need_mail"
+    t.string "need_items"
+    t.boolean "is_c_card"
+    t.string "carry_cus_or"
+    t.boolean "christmas"
+    t.string "festival_key"
+    t.float "festival_weight"
+    t.boolean "hedwig_skip"
+    t.boolean "hedwig_tutorial"
+    t.boolean "is_inland_only"
+    t.boolean "is_community"
+    t.boolean "is_limit"
+    t.boolean "is_repeat"
+    t.float "out_off_day_prob"
+    t.date "start_day"
+    t.string "story_dengmi"
+    t.string "story_end_key"
+    t.string "story_festival_key"
+    t.string "story_need_employee_lv_employee"
+    t.integer "story_need_employee_lv_lv"
+    t.float "weight"
+    t.string "story_start_key"
+    t.float "story_weight"
+    t.decimal "version", precision: 10, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["food_id"], name: "index_mails_on_food_id"
+    t.index ["mail_group_customer_id"], name: "index_mails_on_mail_group_customer_id"
+    t.index ["mail_group_id"], name: "index_mails_on_mail_group_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -359,5 +429,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_06_230559) do
   add_foreign_key "buildings", "building_groups"
   add_foreign_key "buildings", "building_styles"
   add_foreign_key "customer_groups", "localize_data", column: "localize_id"
+  add_foreign_key "customer_need_foods", "customers"
+  add_foreign_key "customer_need_foods", "foods"
+  add_foreign_key "customer_order_foods", "customers"
+  add_foreign_key "customer_order_foods", "foods"
+  add_foreign_key "customers", "customer_groups"
+  add_foreign_key "foods", "customers", column: "need_customer_id"
+  add_foreign_key "mail_groups", "localize_data", column: "localize_id"
+  add_foreign_key "mails", "customers", column: "mail_group_customer_id"
+  add_foreign_key "mails", "foods"
+  add_foreign_key "mails", "mail_groups"
   add_foreign_key "posts", "users"
 end

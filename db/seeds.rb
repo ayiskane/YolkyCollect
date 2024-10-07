@@ -10,24 +10,25 @@
 
 require 'csv'
 
-assets_file_path = '/var/www/vhosts/yolkycollect.com/yolkycollect/db/csv/assets.csv'
+CSV.foreach(Rails.root.join('db/csv/customer_foods.csv'), headers: true) do |row|
+  customer_id = row['customer_id']
+  foods = row['foods'].split(',').map(&:strip)  # Split and strip whitespace
 
-CSV.foreach(assets_file_path, headers: true) do |row|
-  # Find or initialize an asset by the id
-  asset = Asset.find_or_initialize_by(id: row['id'])
+  # Find the customer
+  customer = Customer.find_by(id: customer_id)
 
-  # Set or update the attributes from the CSV
-  asset.asset_id = row['asset_id']
-  asset.url = row['url']
-  asset.version = row['version']
+  if customer
+    foods.each do |food_id|
+      food = Food.find_by(id: food_id)
 
-  # Save the asset (either create a new one or update the existing one)
-  if asset.save
-    puts "Asset with ID #{row['id']} (Asset ID: #{row['asset_id']}) saved successfully."
+      if food
+        # Associate the food with the customer
+        customer.foods << food unless customer.foods.include?(food)
+      else
+        puts "Food with ID #{food_id} not found for Customer #{customer_id}!"
+      end
+    end
   else
-    puts "Failed to save asset with ID #{row['id']}: #{asset.errors.full_messages.join(', ')}"
+    puts "Customer with ID #{customer_id} not found!"
   end
 end
-
-
-puts "Seeding completed!"

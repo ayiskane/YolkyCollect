@@ -1,11 +1,12 @@
 class CreateCustomers < ActiveRecord::Migration[7.2]
   def change
     create_table :customers, id: :string do |t|
-      t.string  :food_order
+      t.references :customer_group, foreign_key: { to_table: :customer_groups }, index: true
+
       t.integer :need_star
       t.integer :need_ad_lv
       t.string :need_memorial
-      t.string :need_customer
+      t.references :need_customer, type: :string, foreign_key: { to_table: :customers }, index: true
       t.string :carry_order
 
       t.integer :share_coin
@@ -35,7 +36,6 @@ class CreateCustomers < ActiveRecord::Migration[7.2]
       t.decimal :version, precision: 10, scale: 2
       t.timestamps
     end
-    add_index :customers, :food_order
     add_index :customers, :need_star
     add_index :customers, :need_ad_lv
     add_index :customers, :need_memorial
