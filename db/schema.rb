@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_07_022033) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_07_211233) do
   create_schema "auth"
   create_schema "extensions"
   create_schema "graphql"
@@ -94,6 +94,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_07_022033) do
 
   create_table "building_groups", id: :string, force: :cascade do |t|
     t.string "localize_id", null: false
+    t.integer "index"
+    t.bigint "area_id"
+    t.index ["area_id"], name: "index_building_groups_on_area_id"
+    t.index ["index"], name: "index_building_groups_on_index"
     t.index ["localize_id"], name: "index_building_groups_on_localize_id"
   end
 
@@ -106,222 +110,23 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_07_022033) do
     t.index ["version"], name: "index_building_styles_on_version"
   end
 
-  create_table "buildings", id: false, force: :cascade do |t|
-    t.string "building_id"
-    t.string "building_group_id", null: false
-    t.integer "index"
-    t.string "building_style_id", null: false
-    t.integer "cost"
-    t.string "cost_type"
-    t.integer "star"
-    t.integer "income"
-    t.integer "tip"
-    t.integer "tip_cap"
-    t.integer "gen_coin"
-    t.integer "gen_plate"
-    t.decimal "cook_time_factor", precision: 10, scale: 2
-    t.string "need_customer"
-    t.string "need_food"
-    t.string "need_mail"
-    t.string "need_egg"
-    t.integer "need_egg_affection_lv"
-    t.integer "need_star"
-    t.integer "need_mewchelin_lv"
-    t.string "battle_order"
-    t.integer "capsule_lv"
-    t.integer "capsule_daily_count"
-    t.integer "flower_lv"
-    t.integer "flower_view_count"
-    t.integer "wish_level"
-    t.boolean "wish_one_touch"
-    t.integer "wish_award_count"
-    t.integer "wish_free_times"
-    t.integer "wish_extra_reward"
-    t.integer "takeout_order_limit"
-    t.integer "takeout_container_type"
-    t.integer "takeout_container_capacity"
-    t.string "limit_buy_activity"
-    t.string "limit_activity"
-    t.string "limit_building_type"
-    t.string "activity"
-    t.decimal "version", precision: 10, scale: 2
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["activity"], name: "index_buildings_on_activity"
-    t.index ["battle_order"], name: "index_buildings_on_battle_order"
-    t.index ["building_group_id"], name: "index_buildings_on_building_group_id"
-    t.index ["building_id"], name: "index_buildings_on_building_id"
-    t.index ["building_style_id"], name: "index_buildings_on_building_style_id"
-    t.index ["capsule_daily_count"], name: "index_buildings_on_capsule_daily_count"
-    t.index ["capsule_lv"], name: "index_buildings_on_capsule_lv"
-    t.index ["cook_time_factor"], name: "index_buildings_on_cook_time_factor"
-    t.index ["cost"], name: "index_buildings_on_cost"
-    t.index ["cost_type"], name: "index_buildings_on_cost_type"
-    t.index ["flower_lv"], name: "index_buildings_on_flower_lv"
-    t.index ["flower_view_count"], name: "index_buildings_on_flower_view_count"
-    t.index ["gen_coin"], name: "index_buildings_on_gen_coin"
-    t.index ["gen_plate"], name: "index_buildings_on_gen_plate"
-    t.index ["income"], name: "index_buildings_on_income"
-    t.index ["index"], name: "index_buildings_on_index"
-    t.index ["limit_activity"], name: "index_buildings_on_limit_activity"
-    t.index ["limit_building_type"], name: "index_buildings_on_limit_building_type"
-    t.index ["limit_buy_activity"], name: "index_buildings_on_limit_buy_activity"
-    t.index ["need_customer"], name: "index_buildings_on_need_customer"
-    t.index ["need_egg"], name: "index_buildings_on_need_egg"
-    t.index ["need_egg_affection_lv"], name: "index_buildings_on_need_egg_affection_lv"
-    t.index ["need_food"], name: "index_buildings_on_need_food"
-    t.index ["need_mail"], name: "index_buildings_on_need_mail"
-    t.index ["need_mewchelin_lv"], name: "index_buildings_on_need_mewchelin_lv"
-    t.index ["need_star"], name: "index_buildings_on_need_star"
-    t.index ["star"], name: "index_buildings_on_star"
-    t.index ["takeout_container_capacity"], name: "index_buildings_on_takeout_container_capacity"
-    t.index ["takeout_container_type"], name: "index_buildings_on_takeout_container_type"
-    t.index ["takeout_order_limit"], name: "index_buildings_on_takeout_order_limit"
-    t.index ["tip"], name: "index_buildings_on_tip"
-    t.index ["tip_cap"], name: "index_buildings_on_tip_cap"
-    t.index ["version"], name: "index_buildings_on_version"
-    t.index ["wish_award_count"], name: "index_buildings_on_wish_award_count"
-    t.index ["wish_extra_reward"], name: "index_buildings_on_wish_extra_reward"
-    t.index ["wish_free_times"], name: "index_buildings_on_wish_free_times"
-    t.index ["wish_level"], name: "index_buildings_on_wish_level"
-    t.index ["wish_one_touch"], name: "index_buildings_on_wish_one_touch"
-  end
-
   create_table "customer_groups", force: :cascade do |t|
     t.string "localize_id", null: false
     t.index ["localize_id"], name: "index_customer_groups_on_localize_id"
   end
 
-  create_table "customer_need_foods", force: :cascade do |t|
-    t.string "customer_id", null: false
-    t.string "food_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["customer_id", "food_id"], name: "index_customer_need_foods_on_customer_id_and_food_id", unique: true
-    t.index ["customer_id"], name: "index_customer_need_foods_on_customer_id"
-    t.index ["food_id"], name: "index_customer_need_foods_on_food_id"
+  create_table "flower_types", id: :string, force: :cascade do |t|
+    t.string "localize_id", null: false
+    t.string "building_group_id"
+    t.index ["building_group_id"], name: "index_flower_types_on_building_group_id"
+    t.index ["localize_id"], name: "index_flower_types_on_localize_id"
   end
 
-  create_table "customer_order_foods", force: :cascade do |t|
-    t.string "customer_id", null: false
-    t.string "food_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["customer_id", "food_id"], name: "index_customer_order_foods_on_customer_id_and_food_id", unique: true
-    t.index ["customer_id"], name: "index_customer_order_foods_on_customer_id"
-    t.index ["food_id"], name: "index_customer_order_foods_on_food_id"
-  end
-
-  create_table "customers", id: :string, force: :cascade do |t|
-    t.bigint "customer_group_id"
-    t.integer "need_star"
-    t.integer "need_ad_lv"
-    t.string "need_memorial"
-    t.string "need_customer"
-    t.string "carry_order"
-    t.integer "share_coin"
-    t.decimal "star_prob", precision: 10, scale: 2
-    t.integer "star_value"
-    t.integer "weight"
-    t.boolean "is_terrace"
-    t.integer "terrace_need_ad_lv"
-    t.integer "terrace_times"
-    t.boolean "is_doll"
-    t.boolean "is_community"
-    t.boolean "is_halloween"
-    t.string "battle_order"
-    t.string "limit_season"
-    t.string "limit_activity"
-    t.string "weight_activity"
-    t.integer "weight_activity_weight"
-    t.integer "ability_food_order_times"
-    t.decimal "ability_cook_time_factor", precision: 10, scale: 2
-    t.decimal "ability_coin_crit_prob", precision: 10, scale: 2
-    t.integer "ability_coin_crit_factor"
-    t.string "asset"
-    t.decimal "version", precision: 10, scale: 2
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["ability_coin_crit_factor"], name: "index_customers_on_ability_coin_crit_factor"
-    t.index ["ability_coin_crit_prob"], name: "index_customers_on_ability_coin_crit_prob"
-    t.index ["ability_cook_time_factor"], name: "index_customers_on_ability_cook_time_factor"
-    t.index ["ability_food_order_times"], name: "index_customers_on_ability_food_order_times"
-    t.index ["asset"], name: "index_customers_on_asset"
-    t.index ["battle_order"], name: "index_customers_on_battle_order"
-    t.index ["carry_order"], name: "index_customers_on_carry_order"
-    t.index ["customer_group_id"], name: "index_customers_on_customer_group_id"
-    t.index ["is_community"], name: "index_customers_on_is_community"
-    t.index ["is_doll"], name: "index_customers_on_is_doll"
-    t.index ["is_halloween"], name: "index_customers_on_is_halloween"
-    t.index ["is_terrace"], name: "index_customers_on_is_terrace"
-    t.index ["limit_activity"], name: "index_customers_on_limit_activity"
-    t.index ["limit_season"], name: "index_customers_on_limit_season"
-    t.index ["need_ad_lv"], name: "index_customers_on_need_ad_lv"
-    t.index ["need_customer"], name: "index_customers_on_need_customer"
-    t.index ["need_memorial"], name: "index_customers_on_need_memorial"
-    t.index ["need_star"], name: "index_customers_on_need_star"
-    t.index ["share_coin"], name: "index_customers_on_share_coin"
-    t.index ["star_prob"], name: "index_customers_on_star_prob"
-    t.index ["star_value"], name: "index_customers_on_star_value"
-    t.index ["terrace_need_ad_lv"], name: "index_customers_on_terrace_need_ad_lv"
-    t.index ["terrace_times"], name: "index_customers_on_terrace_times"
-    t.index ["version"], name: "index_customers_on_version"
-    t.index ["weight"], name: "index_customers_on_weight"
-    t.index ["weight_activity"], name: "index_customers_on_weight_activity"
-    t.index ["weight_activity_weight"], name: "index_customers_on_weight_activity_weight"
-  end
-
-  create_table "foods", id: :string, force: :cascade do |t|
-    t.integer "cost"
-    t.integer "cook_time"
-    t.integer "food_order_customer_group"
-    t.decimal "food_order_factor"
-    t.string "need_customer_id"
-    t.string "need_mail"
-    t.string "need_memorial"
-    t.string "need_order"
-    t.string "need_booth"
-    t.integer "need_star"
-    t.integer "lv_1_income"
-    t.integer "lv_1_need_ad_lv"
-    t.string "lv_1_need_building"
-    t.string "lv_1_need_mail"
-    t.integer "lv_1_need_star"
-    t.integer "lv_2_income"
-    t.string "lv_2_need_building"
-    t.string "lv_2_need_mail"
-    t.integer "lv_2_need_star"
-    t.integer "lv_3_income"
-    t.string "lv_3_need_building"
-    t.string "lv_3_need_mail"
-    t.integer "lv_3_need_star"
-    t.decimal "version", precision: 10, scale: 2
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["cook_time"], name: "index_foods_on_cook_time"
-    t.index ["cost"], name: "index_foods_on_cost"
-    t.index ["food_order_customer_group"], name: "index_foods_on_food_order_customer_group"
-    t.index ["food_order_factor"], name: "index_foods_on_food_order_factor"
-    t.index ["lv_1_income"], name: "index_foods_on_lv_1_income"
-    t.index ["lv_1_need_ad_lv"], name: "index_foods_on_lv_1_need_ad_lv"
-    t.index ["lv_1_need_building"], name: "index_foods_on_lv_1_need_building"
-    t.index ["lv_1_need_mail"], name: "index_foods_on_lv_1_need_mail"
-    t.index ["lv_1_need_star"], name: "index_foods_on_lv_1_need_star"
-    t.index ["lv_2_income"], name: "index_foods_on_lv_2_income"
-    t.index ["lv_2_need_building"], name: "index_foods_on_lv_2_need_building"
-    t.index ["lv_2_need_mail"], name: "index_foods_on_lv_2_need_mail"
-    t.index ["lv_2_need_star"], name: "index_foods_on_lv_2_need_star"
-    t.index ["lv_3_income"], name: "index_foods_on_lv_3_income"
-    t.index ["lv_3_need_building"], name: "index_foods_on_lv_3_need_building"
-    t.index ["lv_3_need_mail"], name: "index_foods_on_lv_3_need_mail"
-    t.index ["lv_3_need_star"], name: "index_foods_on_lv_3_need_star"
-    t.index ["need_booth"], name: "index_foods_on_need_booth"
-    t.index ["need_customer_id"], name: "index_foods_on_need_customer_id"
-    t.index ["need_mail"], name: "index_foods_on_need_mail"
-    t.index ["need_memorial"], name: "index_foods_on_need_memorial"
-    t.index ["need_order"], name: "index_foods_on_need_order"
-    t.index ["need_star"], name: "index_foods_on_need_star"
-    t.index ["version"], name: "index_foods_on_version"
+  create_table "item_types", id: :string, force: :cascade do |t|
+    t.string "localize_id"
+    t.string "asset_id"
+    t.index ["asset_id"], name: "index_item_types_on_asset_id"
+    t.index ["localize_id"], name: "index_item_types_on_localize_id"
   end
 
   create_table "localize_data", id: :string, force: :cascade do |t|
@@ -349,49 +154,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_07_022033) do
     t.index ["version"], name: "index_mail_groups_on_version"
   end
 
-  create_table "mails", force: :cascade do |t|
-    t.integer "star"
-    t.integer "need_star"
-    t.decimal "prob"
-    t.integer "group_index"
-    t.bigint "mail_group_id"
-    t.string "mail_group_customer_id"
-    t.boolean "is_food"
-    t.string "food_id"
-    t.string "need_employee"
-    t.string "need_order"
-    t.string "need_customer"
-    t.string "need_mail"
-    t.string "need_items"
-    t.boolean "is_c_card"
-    t.string "carry_cus_or"
-    t.boolean "christmas"
-    t.string "festival_key"
-    t.float "festival_weight"
-    t.boolean "hedwig_skip"
-    t.boolean "hedwig_tutorial"
-    t.boolean "is_inland_only"
-    t.boolean "is_community"
-    t.boolean "is_limit"
-    t.boolean "is_repeat"
-    t.float "out_off_day_prob"
-    t.date "start_day"
-    t.string "story_dengmi"
-    t.string "story_end_key"
-    t.string "story_festival_key"
-    t.string "story_need_employee_lv_employee"
-    t.integer "story_need_employee_lv_lv"
-    t.float "weight"
-    t.string "story_start_key"
-    t.float "story_weight"
-    t.decimal "version", precision: 10, scale: 2
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["food_id"], name: "index_mails_on_food_id"
-    t.index ["mail_group_customer_id"], name: "index_mails_on_mail_group_customer_id"
-    t.index ["mail_group_id"], name: "index_mails_on_mail_group_id"
-  end
-
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.string "tags"
@@ -400,11 +162,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_07_022033) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
-  end
-
-  create_table "takeout_container_types", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -424,20 +181,14 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_07_022033) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "building_groups", "areas"
   add_foreign_key "building_groups", "localize_data", column: "localize_id"
   add_foreign_key "building_styles", "localize_data", column: "localize_id"
-  add_foreign_key "buildings", "building_groups"
-  add_foreign_key "buildings", "building_styles"
   add_foreign_key "customer_groups", "localize_data", column: "localize_id"
-  add_foreign_key "customer_need_foods", "customers"
-  add_foreign_key "customer_need_foods", "foods"
-  add_foreign_key "customer_order_foods", "customers"
-  add_foreign_key "customer_order_foods", "foods"
-  add_foreign_key "customers", "customer_groups"
-  add_foreign_key "foods", "customers", column: "need_customer_id"
+  add_foreign_key "flower_types", "building_groups"
+  add_foreign_key "flower_types", "localize_data", column: "localize_id"
+  add_foreign_key "item_types", "assets"
+  add_foreign_key "item_types", "localize_data", column: "localize_id"
   add_foreign_key "mail_groups", "localize_data", column: "localize_id"
-  add_foreign_key "mails", "customers", column: "mail_group_customer_id"
-  add_foreign_key "mails", "foods"
-  add_foreign_key "mails", "mail_groups"
   add_foreign_key "posts", "users"
 end

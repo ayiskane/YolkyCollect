@@ -3,8 +3,8 @@ class CreateBuildings < ActiveRecord::Migration[7.2]
     create_table :buildings, id: false, primary_key: [ :building_id, :building_group ] do |t|
       t.string :building_id
       t.references :building_group, null: false, type: :string, foreign_key: { to_table: :building_groups }, index: true
+      t.references :localize, type: :string, foreign_key: { to_table: :localize_data }, index: true
       t.integer :index
-
       t.references :building_style, null: false, type: :string, foreign_key: { to_table: :building_styles }, index: true
 
       t.integer :cost
@@ -18,10 +18,10 @@ class CreateBuildings < ActiveRecord::Migration[7.2]
 
       t.decimal :cook_time_factor, precision: 10, scale: 2
 
-      t.string :need_customer
-      t.string :need_food
-      t.string :need_mail
-      t.string :need_egg
+      t.references :need_customer, type: :string, foreign_key: { to_table: :customers }, index: true
+      t.references :need_food, type: :string, foreign_key: { to_table: :foods }, index: true
+      t.references :need_mail, type: :string, foreign_key: { to_table: :mails }, index: true
+      t.references :need_egg, type: :string, foreign_key: { to_table: :eggs }, index: true
       t.integer :need_egg_affection_lv
       t.integer :need_star
       t.integer :need_mewchelin_lv

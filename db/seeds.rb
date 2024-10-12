@@ -10,7 +10,7 @@
 
 require 'csv'
 
-CSV.foreach(Rails.root.join('db/csv/customer_foods.csv'), headers: true) do |row|
+CSV.foreach(Rails.root.join('db/csv/flower_types.csv'), headers: true) do |row|
   customer_id = row['customer_id']
   foods = row['foods'].split(',').map(&:strip)  # Split and strip whitespace
 

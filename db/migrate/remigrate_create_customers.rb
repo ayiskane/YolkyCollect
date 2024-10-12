@@ -1,8 +1,8 @@
 class CreateCustomers < ActiveRecord::Migration[7.2]
   def change
     create_table :customers, id: :string do |t|
+      t.references :localize, type: :string, foreign_key: { to_table: :localize_data }, index: true
       t.references :customer_group, foreign_key: { to_table: :customer_groups }, index: true
-
       t.integer :need_star
       t.integer :need_ad_lv
       t.string :need_memorial
